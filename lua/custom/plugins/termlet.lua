@@ -3,33 +3,22 @@ return {
     'devArchOverclocked/termlet',
     event = 'VeryLazy',
     opts = {
-      root_dir = '~/Projects/zig/ziglings/',
       terminal = {
         height_ratio = 0.50,
         width_ratio = 1,
         border = 'rounded', -- "none", "single", "double", "rounded", etc.
         position = 'bottom', -- "bottom", "center", "top"
       },
-      scripts = {
-        { name = 'build_project', filename = 'zbr.sh' },
-        { name = 'start_server', filename = 'server_test.py', cmd = 'python3 server_test.py' },
-      },
+      scripts = {},
       debug = false,
     },
     keys = {
       {
-        '<leader>tb',
+        '<leader>tm',
         function()
-          require('termlet').run_build_project()
+          require('termlet').open_menu()
         end,
-        desc = 'TermLet: Build project',
-      },
-      {
-        '<leader>ts',
-        function()
-          require('termlet').run_start_server()
-        end,
-        desc = 'TermLet: Start server',
+        desc = 'TermLet: Open menu',
       },
       {
         '<leader>tl',

@@ -136,8 +136,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set('n', 'C-J', '<cmd>:cnext<CR>')
-vim.keymap.set('n', 'C-K', '<cmd>:cprev<CR>')
+vim.keymap.set('n', ']q', '<cmd>cnext<CR>', { desc = 'Next quickfix item' })
+vim.keymap.set('n', '[q', '<cmd>cprev<CR>', { desc = 'Previous quickfix item' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -842,9 +842,13 @@ require('lazy').setup(
         -- Wire gitflow statusline into the git section
         ---@diagnostic disable-next-line: duplicate-set-field
         statusline.section_git = function(args)
-          if statusline.is_truncated(args.trunc_width) then return '' end
+          if statusline.is_truncated(args.trunc_width) then
+            return ''
+          end
           local ok, gitflow = pcall(require, 'gitflow')
-          if not ok then return '' end
+          if not ok then
+            return ''
+          end
           return gitflow.statusline()
         end
 

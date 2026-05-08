@@ -2,26 +2,32 @@ return {
   {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    cmd = { 'Trouble', 'TroubleToggle', 'TroubleRefresh' },
+    cmd = 'Trouble',
     keys = {
-      -- simple toggle
-      { '<leader>xx', '<cmd>Trouble<CR>', desc = 'Trouble: Toggle' },
-      -- diagnostics for the current buffer
-      { '<leader>xd', '<cmd>TroubleToggle document_diagnostics<CR>', desc = 'Trouble: Document Diagnostics' },
-      -- all workspace diagnostics
-      { '<leader>xw', '<cmd>TroubleToggle workspace_diagnostics<CR>', desc = 'Trouble: Workspace Diagnostics' },
-      -- quickfix / loclist
-      { '<leader>xq', '<cmd>Trouble quickfix<CR>', desc = 'Trouble: QuickFix' },
-      { '<leader>xl', '<cmd>Trouble loclist<CR>', desc = 'Trouble: Location List' },
-      { '[t', '<cmd>TroublePrevious<CR>', desc = 'Trouble: Previous item' },
-      { ']t', '<cmd>TroubleNext<CR>', desc = 'Trouble: Next item' },
+      { '<leader>xx', '<cmd>Trouble diagnostics toggle<CR>', desc = 'Trouble: Diagnostics' },
+      { '<leader>xd', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>', desc = 'Trouble: Buffer Diagnostics' },
+      { '<leader>xw', '<cmd>Trouble diagnostics toggle<CR>', desc = 'Trouble: Workspace Diagnostics' },
+      { '<leader>xq', '<cmd>Trouble qflist toggle<CR>', desc = 'Trouble: Quickfix' },
+      { '<leader>xl', '<cmd>Trouble loclist toggle<CR>', desc = 'Trouble: Location List' },
+      {
+        '[t',
+        function()
+          require('trouble').prev { mode = 'last', jump = true }
+        end,
+        desc = 'Trouble: Previous item',
+      },
+      {
+        ']t',
+        function()
+          require('trouble').next { mode = 'last', jump = true }
+        end,
+        desc = 'Trouble: Next item',
+      },
       {
         '<leader>fq',
         function()
-          -- 1) Populate Trouble's quickfix list (this also sets Vim's qf-list)
-          vim.cmd 'Trouble quickfix'
+          vim.cmd 'Trouble qflist open'
 
-          -- 2) Launch Telescope on that quickfix list
           require('telescope.builtin').quickfix()
         end,
         desc = 'Trouble → Telescope Quickfix',
