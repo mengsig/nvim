@@ -1,5 +1,5 @@
 return {
-  dir = '/home/mengsig/Projects/nvime',
+  'mengsig/nvime',
   name = 'nvime',
   opts = {},
 }
