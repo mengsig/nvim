@@ -1,6 +1,6 @@
 return {
   {
-    'devGunnin/gitflow',
+    dir = '~/Projects/firstmate/projects/gitflow/',
     event = 'VeryLazy',
     init = function()
       vim.g.loaded_gitflow = 1
