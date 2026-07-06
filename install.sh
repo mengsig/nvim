@@ -142,11 +142,20 @@ case "$DISTRO" in
       tree-sitter-cli     # nvim-treesitter (main branch) parser compilation
       wl-clipboard xclip  # system clipboard (wayland + X11)
       python python-pip   # general / Mason python tooling
+      gh-cli              # github-cli
     )
     sudo pacman -S --needed "${packages[@]}"
     ;;
 
   debian)
+    log "Adding gh-keyring"
+    (type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
+    	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
+    	&& out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+    	&& cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+    	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+    	&& sudo mkdir -p -m 755 /etc/apt/sources.list.d \
+    	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
     log "Installing packages with apt"
     sudo apt-get update
     packages=(
@@ -155,6 +164,7 @@ case "$DISTRO" in
       ripgrep fd-find          # telescope / snacks pickers (binary is 'fdfind')
       wl-clipboard xclip       # system clipboard (wayland + X11)
       python3 python3-pip python3-venv
+      gh                       # github-cli
     )
     sudo apt-get install -y "${packages[@]}"
 
