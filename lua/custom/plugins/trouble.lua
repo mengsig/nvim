@@ -12,6 +12,9 @@ return {
       {
         '[t',
         function()
+          -- trouble's action proxy is dynamically dispatched, so lua_ls
+          -- misreads its arity/return type here.
+          ---@diagnostic disable-next-line: missing-parameter, param-type-mismatch, missing-fields
           require('trouble').prev { mode = 'last', jump = true }
         end,
         desc = 'Trouble: Previous item',
@@ -19,6 +22,7 @@ return {
       {
         ']t',
         function()
+          ---@diagnostic disable-next-line: missing-parameter, param-type-mismatch, missing-fields
           require('trouble').next { mode = 'last', jump = true }
         end,
         desc = 'Trouble: Next item',
