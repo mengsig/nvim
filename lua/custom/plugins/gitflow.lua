@@ -1,6 +1,6 @@
 return {
   {
-    dir = '~/Projects/firstmate/projects/gitflow/',
+    'mengsig/gitflow',
     event = 'VeryLazy',
     init = function()
       vim.g.loaded_gitflow = 1
@@ -9,7 +9,6 @@ return {
       keybindings = {
         help = '<leader>gh',
         open = '<leader>go',
-        refresh = '<leader>gr',
         close = '<leader>gq',
       },
       ui = {
