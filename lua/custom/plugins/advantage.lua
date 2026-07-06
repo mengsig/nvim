@@ -1,7 +1,7 @@
 -- advantage.nvim — coding-agent harness (local development checkout)
 return {
   {
-    dir = '~/Projects/advantage.nvim',
+    'mengsig/advantage.nvim',
     name = 'advantage.nvim',
     cmd = 'Advantage',
     keys = {
