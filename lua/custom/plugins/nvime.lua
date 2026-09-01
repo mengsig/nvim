@@ -1,5 +1,8 @@
 return {
-  'mengsig/nvime',
+  dir = '~/Projects/nvime/',
+  build = 'npm --prefix agent install && npm --prefix agent run build',
   name = 'nvime',
-  opts = {},
+  opts = {
+    keymaps = { enabled = true },
+  },
 }
