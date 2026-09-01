@@ -1,0 +1,5 @@
+return {
+  {
+    'devGunnin/dblens.nvim',
+  },
+}

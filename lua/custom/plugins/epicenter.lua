@@ -1,0 +1,5 @@
+return {
+  {
+    'mengsig/epicenter.nvim',
+  },
+}
